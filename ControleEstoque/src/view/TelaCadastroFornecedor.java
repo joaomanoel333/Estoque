@@ -5,6 +5,9 @@
  */
 package view;
 
+import model.bean.Fornecedor;
+import model.dao.FornecedorDAO;
+
 /**
  *
  * @author Joao_Manoel
@@ -40,6 +43,8 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         txtFResponsavel = new javax.swing.JTextField();
         txtFTelResponsavel = new javax.swing.JFormattedTextField();
         btnFCadastrar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -77,6 +82,15 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         }
 
         btnFCadastrar.setText("Cadastrar");
+        btnFCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFCadastrarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Atualizar");
+
+        jButton2.setText("Excluir");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -103,18 +117,23 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
                                 .addComponent(txtFCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnFCadastrar)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtFTelResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFTelResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(21, 21, 21))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(btnFCadastrar)
+                .addGap(55, 55, 55)
+                .addComponent(jButton1)
+                .addGap(85, 85, 85)
+                .addComponent(jButton2)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +155,10 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
                     .addComponent(txtFResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFTelResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addComponent(btnFCadastrar))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFCadastrar)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Fornecedores Cadastrados"));
@@ -189,6 +211,19 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnFCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFCadastrarActionPerformed
+       Fornecedor f = new Fornecedor();
+       FornecedorDAO dao = new FornecedorDAO();
+       f.setNome(txtFNome.getText());
+       f.setResponsavel(txtFResponsavel.getText());
+       f.setCNPJ(txtFCNPJ.getText());
+       f.setTelefone(txtFTelefone.getText());
+       f.setTelefoneResponsavel(txtFTelResponsavel.getText());
+       
+       dao.create(f);
+       
+    }//GEN-LAST:event_btnFCadastrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -226,6 +261,8 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFCadastrar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

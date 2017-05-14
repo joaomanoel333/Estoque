@@ -7,9 +7,9 @@ public class Fornecedor {
     private int idFornecedor;
     private String nome;
     private String responsavel;
-    private int CNPJ;
-    private int telefone;
-    private int telefoneResponsavel;
+    private String CNPJ;
+    private String telefone;
+    private String telefoneResponsavel;
     private int usuarioCadastro;
     private Date dataCadastro;
 
@@ -37,35 +37,35 @@ public class Fornecedor {
         this.responsavel = responsavel;
     }
 
-    public int getCNPJ() {
+    public String getCNPJ() {
         return CNPJ;
     }
 
-    public void setCNPJ(int CNPJ) {
+    public void setCNPJ(String CNPJ) {
         this.CNPJ = CNPJ;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public int getTelefoneresponsavel() {
+    public String getTelefoneResponsavel() {
         return telefoneResponsavel;
     }
 
-    public void setTelefoneresponsavel(int telefoneresponsavel) {
+    public void setTelefoneResponsavel(String telefoneresponsavel) {
         this.telefoneResponsavel = telefoneresponsavel;
     }
 
-    public int getUsuariocadastro() {
+    public int getUsuarioCadastro() {
         return usuarioCadastro;
     }
 
-    public void setUsuariocadastro(int usuariocadastro) {
+    public void setUsuarioCadastro(int usuariocadastro) {
         this.usuarioCadastro = usuariocadastro;
     }
 
