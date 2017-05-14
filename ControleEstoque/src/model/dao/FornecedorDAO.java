@@ -19,15 +19,15 @@ public class FornecedorDAO {
             stmt = con.prepareStatement("INSERT INTO fornecedor(Nome,Responsavel,CNPJ,Telefone,TelefoneResponsavel) VALUES(?,?,?,?,?,)");
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getResponsavel());
-            stmt.setString(3, f.getCNPJ());
-            stmt.setString(4, f.getTelefone());
-            stmt.setString(5, f.getTelefoneResponsavel());
+            stmt.setInt(3, f.getCNPJ());
+            stmt.setInt(4, f.getTelefone());
+            stmt.setInt(5, f.getTelefoneResponsavel());
 
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Salvo com sucesso");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso"+ex);
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar "+ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }

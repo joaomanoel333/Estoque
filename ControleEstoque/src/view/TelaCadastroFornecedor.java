@@ -216,9 +216,9 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
        FornecedorDAO dao = new FornecedorDAO();
        f.setNome(txtFNome.getText());
        f.setResponsavel(txtFResponsavel.getText());
-       f.setCNPJ(txtFCNPJ.getText());
-       f.setTelefone(txtFTelefone.getText());
-       f.setTelefoneResponsavel(txtFTelResponsavel.getText());
+       f.setCNPJ(Integer.parseInt(txtFCNPJ.getText()) );
+       f.setTelefone(Integer.parseInt(txtFTelefone.getText()));
+       f.setTelefoneResponsavel(Integer.parseInt(txtFTelResponsavel.getText()));
        
        dao.create(f);
        
