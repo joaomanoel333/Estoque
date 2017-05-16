@@ -309,6 +309,8 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
             txtCDescricao.setText("");
             readJTable();
 
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhuma categoria selecionada!");
         }
 
     }//GEN-LAST:event_btnCAtualizarActionPerformed

@@ -32,6 +32,7 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         for (Fornecedor f : fdao.read()) {
 
             dtmFornecedor.addRow(new Object[]{
+                f.getIdFornecedor(),
                 f.getNome(),
                 f.getResponsavel(),
                 f.getCNPJ(),
@@ -57,8 +58,8 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         txtFResponsavel = new javax.swing.JTextField();
         txtFTelResponsavel = new javax.swing.JFormattedTextField();
         btnFCadastrar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnFAtualizar = new javax.swing.JButton();
+        btnFExcluir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFornecedor = new javax.swing.JTable();
@@ -104,9 +105,19 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Atualizar");
+        btnFAtualizar.setText("Atualizar");
+        btnFAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFAtualizarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Excluir");
+        btnFExcluir.setText("Excluir");
+        btnFExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -146,9 +157,9 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
                 .addGap(96, 96, 96)
                 .addComponent(btnFCadastrar)
                 .addGap(219, 219, 219)
-                .addComponent(jButton1)
+                .addComponent(btnFAtualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnFExcluir)
                 .addGap(87, 87, 87))
         );
         jPanel2Layout.setVerticalGroup(
@@ -173,8 +184,8 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFCadastrar)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)))
+                    .addComponent(btnFAtualizar)
+                    .addComponent(btnFExcluir)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Fornecedores Cadastrados"));
@@ -187,6 +198,16 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
                 "ID", "NOME", "CNPJ", "TELEFONE", "RESPONSAVEL", "TELEFONE RESPONSAVEL"
             }
         ));
+        tblFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblFornecedorMouseClicked(evt);
+            }
+        });
+        tblFornecedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblFornecedorKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblFornecedor);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -263,12 +284,88 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
             f.setTelefoneResponsavel(txtFTelResponsavel.getText());
 
             dao.create(f);
+
+            txtFNome.setText("");
+            txtFCNPJ.setText("");
+            txtFTelefone.setText("");
+            txtFResponsavel.setText("");
+            txtFTelResponsavel.setText("");
+
+            readJTable();
         }
     }//GEN-LAST:event_btnFCadastrarActionPerformed
 
+    private void btnFAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFAtualizarActionPerformed
+        if (tblFornecedor.getSelectedRow() != -1) {
+
+            Fornecedor f = new Fornecedor();
+            FornecedorDAO dao = new FornecedorDAO();
+            f.setNome(txtFNome.getText());
+            f.setCNPJ(txtFCNPJ.getText());
+            f.setTelefone(txtFTelefone.getText());
+            f.setResponsavel(txtFResponsavel.getText());
+            f.setTelefoneResponsavel(txtFTelResponsavel.getText());
+            f.setIdFornecedor((int) tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 0));
+
+            dao.update(f);
+
+            txtFNome.setText("");
+            txtFCNPJ.setText("");
+            txtFTelefone.setText("");
+            txtFResponsavel.setText("");
+            txtFTelResponsavel.setText("");
+
+            readJTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum fornecedor selecionado!");
+        }
+    }//GEN-LAST:event_btnFAtualizarActionPerformed
+
+    private void btnFExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFExcluirActionPerformed
+        if (tblFornecedor.getSelectedRow() != -1) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja excluir o fornecedor selecionada?") == 0) {
+
+                Fornecedor f = new Fornecedor();
+                FornecedorDAO dao = new FornecedorDAO();
+                f.setIdFornecedor((int) tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 0));
+
+                dao.delete(f);
+                readJTable();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um fornecedor para excluir!");
+        }
+    }//GEN-LAST:event_btnFExcluirActionPerformed
+
+    private void tblFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFornecedorMouseClicked
+        if (tblFornecedor.getSelectedRow() != -1) {
+
+            txtFNome.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 1).toString());
+            txtFCNPJ.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 2).toString());
+            txtFTelefone.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 3).toString());
+            txtFResponsavel.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 4).toString());
+            txtFTelResponsavel.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 5).toString());
+
+        }
+    }//GEN-LAST:event_tblFornecedorMouseClicked
+
+    private void tblFornecedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblFornecedorKeyReleased
+
+        if (tblFornecedor.getSelectedRow() != -1) {
+
+            txtFNome.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 1).toString());
+            txtFCNPJ.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 2).toString());
+            txtFTelefone.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 3).toString());
+            txtFResponsavel.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 4).toString());
+            txtFTelResponsavel.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 5).toString());
+
+        }
+
+    }//GEN-LAST:event_tblFornecedorKeyReleased
+
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -310,9 +407,9 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFAtualizar;
     private javax.swing.JButton btnFCadastrar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnFExcluir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
