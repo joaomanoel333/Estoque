@@ -15,14 +15,14 @@ import model.bean.Categoria;
 
 
 public class CategoriaDAO {
-        public void create(Categoria d) {
+        public void create(Categoria c) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
             stmt = con.prepareStatement("insert into categoria(Nome,Descricao) VALUES(?,?)");
-            stmt.setString(1,d.getNome() );
-            stmt.setString(2,d.getDescricao() );
+            stmt.setString(1,c.getNome() );
+            stmt.setString(2,c.getDescricao() );
 
             stmt.executeUpdate();
 
@@ -63,5 +63,28 @@ public class CategoriaDAO {
             }
             return categorias;
         }
+        
+        
+        
+        public void update(Categoria c) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("UPDATE categoria SET Nome = ?, Descricao = ? WHERE idCategoria = ?");
+            stmt.setString(1,c.getNome());
+            stmt.setString(2,c.getDescricao());
+            stmt.setInt(3, c.getIdCategoria());
+
+            stmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar "+ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+        
     
 }

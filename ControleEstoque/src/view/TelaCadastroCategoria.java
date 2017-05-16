@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -17,30 +18,27 @@ import model.dao.CategoriaDAO;
  */
 public class TelaCadastroCategoria extends javax.swing.JFrame {
 
-
-
     /**
      * Creates new form TelaCadastroCategoria
      */
     public TelaCadastroCategoria() {
         initComponents();
         DefaultTableModel dtmCategorias = (DefaultTableModel) tblCategoria.getModel();
+        //seta o tamanho das colunas
         tblCategoria.setRowSorter(new TableRowSorter(dtmCategorias));
         tblCategoria.getColumn("ID").setPreferredWidth(35);
         tblCategoria.getColumn("NOME").setPreferredWidth(120);
         tblCategoria.getColumn("DESCRIÇÃO").setPreferredWidth(227);
         readJTable();
-        
-        
+
     }
 
-
-    public void readJTable(){
+    public void readJTable() {
         DefaultTableModel dtmCategorias = (DefaultTableModel) tblCategoria.getModel();
         dtmCategorias.setNumRows(0);
         CategoriaDAO cdao = new CategoriaDAO();
-        for(Categoria c: cdao.read()){
-            
+        for (Categoria c : cdao.read()) {
+
             dtmCategorias.addRow(new Object[]{
                 c.getIdCategoria(),
                 c.getNome(),
@@ -48,8 +46,7 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
             });
         }
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -91,8 +88,18 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         });
 
         btnCAtualizar.setText("Atualizar");
+        btnCAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCAtualizarActionPerformed(evt);
+            }
+        });
 
         btnCExcluir.setText("Excluir");
+        btnCExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -146,8 +153,27 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
             new String [] {
                 "ID", "NOME", "DESCRIÇÃO"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblCategoria.setToolTipText("");
         tblCategoria.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCategoriaMouseClicked(evt);
+            }
+        });
+        tblCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblCategoriaKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblCategoria);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -199,21 +225,81 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
 
     private void btnCCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCCadastrarActionPerformed
 
-        
-        
-        
+        boolean unico = false;
         //cadastra no banco
         Categoria c = new Categoria();
         CategoriaDAO dao = new CategoriaDAO();
-        c.setNome(txtCNome.getText());
-        c.setDescricao(txtCDescricao.getText());
-        
-        dao.create(c);
-        
-        txtCNome.setText("");
-        txtCDescricao.setText("");
-        readJTable();
+
+        //for(dao.read().next()){
+        for (int i = 0; i < tblCategoria.getModel().getRowCount(); i++) {
+            if (txtCNome.getText().equals(tblCategoria.getValueAt(i, 1))) {
+                unico = true;
+
+            } else {
+                unico = false;
+            }
+        }
+        System.out.println(unico + " " + tblCategoria.getModel().getRowCount());
+
+        if (unico == true) {
+            JOptionPane.showMessageDialog(null, "Produto já cadastrado!");
+        } else {
+
+            c.setNome(txtCNome.getText());
+            c.setDescricao(txtCDescricao.getText());
+
+            dao.create(c);
+
+            txtCNome.setText("");
+            txtCDescricao.setText("");
+            readJTable();
+        }
     }//GEN-LAST:event_btnCCadastrarActionPerformed
+
+    private void tblCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCategoriaKeyReleased
+
+        if (tblCategoria.getSelectedRow() != -1) {
+
+            txtCNome.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 1).toString());
+            txtCDescricao.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 2).toString());
+
+        }
+
+    }//GEN-LAST:event_tblCategoriaKeyReleased
+
+    private void btnCExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCExcluirActionPerformed
+
+
+    }//GEN-LAST:event_btnCExcluirActionPerformed
+
+    private void tblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoriaMouseClicked
+
+        if (tblCategoria.getSelectedRow() != -1) {
+
+            txtCNome.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 1).toString());
+            txtCDescricao.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 2).toString());
+        }
+    }//GEN-LAST:event_tblCategoriaMouseClicked
+
+    private void btnCAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCAtualizarActionPerformed
+
+        if (tblCategoria.getSelectedRow() != -1) {
+
+            Categoria c = new Categoria();
+            CategoriaDAO dao = new CategoriaDAO();
+            c.setNome(txtCNome.getText());
+            c.setDescricao(txtCDescricao.getText());
+            c.setIdCategoria((int) tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 0));
+
+            dao.update(c);
+
+            txtCNome.setText("");
+            txtCDescricao.setText("");
+            readJTable();
+
+        }
+
+    }//GEN-LAST:event_btnCAtualizarActionPerformed
 
     /**
      * @param args the command line arguments

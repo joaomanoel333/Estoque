@@ -1,0 +1,155 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 1048576 bytes for AllocateHeap
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (memory/allocation.inline.hpp:61), pid=9432, tid=0x0000000000000868
+#
+# JRE version:  (8.0_121-b13) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.121-b13 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000000020d0800):  JavaThread "Unknown thread" [_thread_in_vm, id=2152, stack(0x0000000001f90000,0x0000000002090000)]
+
+Stack: [0x0000000001f90000,0x0000000002090000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x00000000020d0800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=2152, stack(0x0000000001f90000,0x0000000002090000)]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 38400K, used 665K [0x00000000d5800000, 0x00000000d8280000, 0x0000000100000000)
+  eden space 33280K, 2% used [0x00000000d5800000,0x00000000d58a6670,0x00000000d7880000)
+  from space 5120K, 0% used [0x00000000d7d80000,0x00000000d7d80000,0x00000000d8280000)
+  to   space 5120K, 0% used [0x00000000d7880000,0x00000000d7880000,0x00000000d7d80000)
+ ParOldGen       total 87552K, used 0K [0x0000000080800000, 0x0000000085d80000, 0x00000000d5800000)
+  object space 87552K, 0% used [0x0000000080800000,0x0000000080800000,0x0000000085d80000)
+ Metaspace       used 770K, capacity 4480K, committed 4480K, reserved 1056768K
+  class space    used 75K, capacity 384K, committed 384K, reserved 1048576K
+
+Card table byte_map: [0x0000000011650000,0x0000000011a50000] byte_map_base: 0x000000001124c000
+
+Marking Bits: (ParMarkBitMap*) 0x00000000535cb6d0
+ Begin Bits: [0x0000000012500000, 0x00000000144e0000)
+ End Bits:   [0x00000000144e0000, 0x00000000164c0000)
+
+Polling page: 0x0000000002090000
+
+CodeCache: size=245760Kb used=327Kb max_used=327Kb free=245432Kb
+ bounds [0x0000000002290000, 0x0000000002500000, 0x0000000011290000]
+ total_blobs=57 nmethods=0 adapters=38
+ compilation: enabled
+
+Compilation events (0 events):
+No events
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (10 events):
+Event: 0.026 loading class java/lang/Short
+Event: 0.026 loading class java/lang/Short done
+Event: 0.026 loading class java/lang/Integer
+Event: 0.026 loading class java/lang/Integer done
+Event: 0.026 loading class java/lang/Long
+Event: 0.026 loading class java/lang/Long done
+Event: 0.027 loading class java/lang/NullPointerException
+Event: 0.027 loading class java/lang/NullPointerException done
+Event: 0.027 loading class java/lang/ArithmeticException
+Event: 0.027 loading class java/lang/ArithmeticException done
+
+
+Dynamic libraries:
+0x00007ff747a90000 - 0x00007ff747ac7000 	C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+0x00007ffcea010000 - 0x00007ffcea1e1000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffce8570000 - 0x00007ffce861c000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffcc43d0000 - 0x00007ffcc4403000 	C:\Program Files\AVAST Software\Avast\x64\aswhooka.dll
+0x00007ffce6f00000 - 0x00007ffce711d000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffce86f0000 - 0x00007ffce8792000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffce8260000 - 0x00007ffce82fe000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffce7740000 - 0x00007ffce7799000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffce9ee0000 - 0x00007ffcea001000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffce9d70000 - 0x00007ffce9ed5000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffce7360000 - 0x00007ffce737e000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffce8620000 - 0x00007ffce8654000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffce7120000 - 0x00007ffce72a2000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffcdca30000 - 0x00007ffcdccaa000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.14393.953_none_42151e83c686086b\COMCTL32.dll
+0x00007ffce7c80000 - 0x00007ffce7f48000 	C:\WINDOWS\System32\combase.dll
+0x00007ffce6500000 - 0x00007ffce65f5000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffce7380000 - 0x00007ffce73ea000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffce8660000 - 0x00007ffce868e000 	C:\WINDOWS\System32\IMM32.DLL
+0x0000000052cd0000 - 0x0000000052da2000 	C:\Program Files\Java\jdk1.8.0_121\jre\bin\msvcr100.dll
+0x0000000052db0000 - 0x000000005364b000 	C:\Program Files\Java\jdk1.8.0_121\jre\bin\server\jvm.dll
+0x00007ffce7f50000 - 0x00007ffce7f58000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffcdc670000 - 0x00007ffcdc679000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffce8180000 - 0x00007ffce81ea000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffce41a0000 - 0x00007ffce41c3000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffce1fb0000 - 0x00007ffce1fba000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffce40a0000 - 0x00007ffce40cb000 	C:\WINDOWS\SYSTEM32\WINMMBASE.dll
+0x00007ffce6600000 - 0x00007ffce6642000 	C:\WINDOWS\System32\cfgmgr32.dll
+0x0000000056eb0000 - 0x0000000056ebf000 	C:\Program Files\Java\jdk1.8.0_121\jre\bin\verify.dll
+0x0000000052ca0000 - 0x0000000052cc9000 	C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.dll
+0x0000000052c80000 - 0x0000000052c96000 	C:\Program Files\Java\jdk1.8.0_121\jre\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF-8 
+java_command: view.TelaCadastroCategoria
+java_class_path (initial): C:\Program Files\NetBeans 8.2\ide\modules\ext\mysql-connector-java-5.1.23-bin.jar;C:\Users\João\Documents\Java\Estoque\ControleEstoque\build\classes
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_121
+CLASSPATH=;C:\Program Files\Java\jdk1.8.0_121\lib;C:\Program Files\Java\jdk1.8.0_121\lib\tools.jar;C:\Program Files\Java\jdk1.8.0_121\lib\dt.jar;C:\Program Files\Java\jdk1.8.0_121\lib\htmlconverter.jar;C:\Program Files\Java\jdk1.8.0_121\jre\lib;C:\Program Files\Java\jdk1.8.0_121\jre\lib\rt.jar;
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_121\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Users\João\AppData\Local\Microsoft\WindowsApps;
+USERNAME=João
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 21 Model 2 Stepping 0, AuthenticAMD
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 14393 (10.0.14393.1198)
+
+CPU:total 8 (8 cores per cpu, 1 threads per core) family 21 model 2 stepping 0, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, aes, clmul, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv, bmi1
+
+Memory: 4k page, physical 8352368k(2101432k free), swap 8352368k(5696k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.121-b13) for windows-amd64 JRE (1.8.0_121-b13), built on Dec 12 2016 18:21:36 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Tue May 16 15:26:37 2017
+elapsed time: 0 seconds (0d 0h 0m 0s)
+
