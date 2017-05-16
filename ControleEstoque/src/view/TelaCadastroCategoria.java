@@ -226,15 +226,13 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
     private void btnCCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCCadastrarActionPerformed
 
         boolean unico = false;
-        //cadastra no banco
         Categoria c = new Categoria();
         CategoriaDAO dao = new CategoriaDAO();
 
-        //for(dao.read().next()){
+        //Valida se já existe um item salvo
         for (int i = 0; i < tblCategoria.getModel().getRowCount(); i++) {
             if (txtCNome.getText().equals(tblCategoria.getValueAt(i, 1))) {
                 unico = true;
-
             } else {
                 unico = false;
             }
