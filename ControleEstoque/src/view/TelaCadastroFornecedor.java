@@ -129,9 +129,9 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(btnFCadastrar)
-                .addGap(55, 55, 55)
+                .addGap(76, 76, 76)
                 .addComponent(jButton1)
-                .addGap(85, 85, 85)
+                .addGap(72, 72, 72)
                 .addComponent(jButton2)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
