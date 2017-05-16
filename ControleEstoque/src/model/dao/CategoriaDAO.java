@@ -28,7 +28,7 @@ public class CategoriaDAO {
 
             JOptionPane.showMessageDialog(null, "Salvo com sucesso");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Salvar "+ex);
+            JOptionPane.showMessageDialog(null, "Erro ao salvar "+ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -78,9 +78,30 @@ public class CategoriaDAO {
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Salvar "+ex);
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: "+ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+        
+        
+        
+        public void delete(Categoria c) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("DELETE FROM categoria WHERE idCategoria = ?");
+            stmt.setInt(1,c.getIdCategoria());
+
+
+            stmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir "+ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }

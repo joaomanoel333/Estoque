@@ -269,7 +269,21 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
 
     private void btnCExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCExcluirActionPerformed
 
+        if (tblCategoria.getSelectedRow() != -1) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja excluir a categoria selecionada?") == 0) {
+                Categoria c = new Categoria();
+                CategoriaDAO dao = new CategoriaDAO();
+                c.setIdCategoria((int) tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 0));
 
+                dao.delete(c);
+
+                txtCNome.setText("");
+                txtCDescricao.setText("");
+                readJTable();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione uma categoria para excluir");
+        }
     }//GEN-LAST:event_btnCExcluirActionPerformed
 
     private void tblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoriaMouseClicked
