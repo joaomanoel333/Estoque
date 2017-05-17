@@ -26,15 +26,14 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         initComponents();
         DefaultTableModel dtmCategorias = (DefaultTableModel) tblCategoria.getModel();
         tblCategoria.setRowSorter(new TableRowSorter(dtmCategorias));
-        
+
         //seta o tamanho das colunas
         tblCategoria.getColumn("ID").setPreferredWidth(35);
         tblCategoria.getColumn("NOME").setPreferredWidth(120);
         tblCategoria.getColumn("DESCRIÇÃO").setPreferredWidth(227);
         readJTable();
-        lblCUsuario.setText("Usuário: "+ Sessao.getUsuario());
-        
-        
+        lblCUsuario.setText("Usuário: " + Sessao.getUsuario());
+
     }
 
     public void readJTable() {
@@ -246,7 +245,7 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
                 unico = false;
             }
         }
-        
+
         System.out.println(unico + " " + tblCategoria.getModel().getRowCount());
 
         if (unico == true) {

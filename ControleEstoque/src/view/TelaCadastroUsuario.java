@@ -23,16 +23,13 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
      */
     public TelaCadastroUsuario() {
         initComponents();
-        System.out.println("Erro load 1");
         DefaultTableModel dtmUsuario = (DefaultTableModel) tblUsuario.getModel();
         tblUsuario.setRowSorter(new TableRowSorter(dtmUsuario));
         readJTable();
         lblUUsuario.setText("Usuário: " + Sessao.getUsuario());
-        System.out.println("Erro load 2");
     }
 
     public void readJTable() {
-        System.out.println("Erro read 1");
         String edicao = null;
         DefaultTableModel dtmUsuario = (DefaultTableModel) tblUsuario.getModel();
         dtmUsuario.setNumRows(0);
@@ -51,7 +48,6 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                 edicao
             });
         }
-        System.out.println("Erro read 2");
     }
 
     @SuppressWarnings("unchecked")
@@ -79,7 +75,6 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Usuário");
-        setAlwaysOnTop(true);
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Usuário"));
@@ -237,47 +232,37 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         boolean unico = false;
         Usuario u = new Usuario();
         UsuarioDAO dao = new UsuarioDAO();
-        System.out.println("Erro cadastrar 1");
         if (txtSenha.getText().equals(txtConfirmaSenha.getText())) {
 
             //Valida se já existe um item salvo
             for (int i = 0; i < tblUsuario.getModel().getRowCount(); i++) {
                 if (txtUsuario.getText().equals(tblUsuario.getValueAt(i, 1))) {
                     unico = true;
-                    System.out.println("Erro cadastrar 2");
                 } else {
                     unico = false;
-                    System.out.println("Erro cadastrar 3");
                 }
             }
-            System.out.println("Erro cadastrar 4");
 
             if (unico == true) {
                 JOptionPane.showMessageDialog(null, "Usuário já cadastrado!");
             } else {
 
-                System.out.println("Erro cadastrar 5");
                 u.setNome(txtUsuario.getText());
                 u.setSenha(txtSenha.getText());
                 u.setEdicao(0);
                 if (chkPermissao.isSelected()) {
                     u.setEdicao(1);
-                    System.out.println("Erro cadastrar 6");
                 } else {
                     u.setEdicao(0);
-                    System.out.println("Erro cadastrar 7");
                 }
 
                 dao.create(u);
-                System.out.println("Erro cadastrar 8");
 
                 txtUsuario.setText("");
                 txtSenha.setText("");
                 txtConfirmaSenha.setText("");
                 chkPermissao.setSelected(unico);
-                System.out.println("Erro cadastrar 8");
                 readJTable();
-                System.out.println("Erro cadastrar 9");
             }
         } else {
             JOptionPane.showMessageDialog(null, "A senha digitada precisa ser igual em ambos os campos!");
@@ -309,13 +294,13 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
             readJTable();
 
         } else {
-            JOptionPane.showMessageDialog(null, "Nenhuma categoria selecionada!");
+            JOptionPane.showMessageDialog(null, "Nenhuma usuário selecionado!");
         }
     }//GEN-LAST:event_btnUAtualizarActionPerformed
 
     private void btnUExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUExcluirActionPerformed
         if (tblUsuario.getSelectedRow() != -1) {
-            if (JOptionPane.showConfirmDialog(null, "Deseja excluir a categoria selecionada?") == 0) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja excluir o usuário selecionado?") == 0) {
                 Usuario u = new Usuario();
                 UsuarioDAO dao = new UsuarioDAO();
                 u.setIdUsuario((int) tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 0));
@@ -328,20 +313,20 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                 readJTable();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione uma categoria para excluir");
+            JOptionPane.showMessageDialog(null, "Selecione um usuário para excluir");
         }
     }//GEN-LAST:event_btnUExcluirActionPerformed
 
     private void tblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuarioMouseClicked
-       
+
         if (tblUsuario.getSelectedRow() != -1) {
 
             txtUsuario.setText(tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 1).toString());
             txtSenha.setText(tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 2).toString());
             txtConfirmaSenha.setText(tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 2).toString());
-            if(tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 3).equals("Sim")){
+            if (tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 3).equals("Sim")) {
                 chkPermissao.setSelected(true);
-            }else{
+            } else {
                 chkPermissao.setSelected(false);
             }
         }
@@ -353,9 +338,9 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
             txtUsuario.setText(tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 1).toString());
             txtSenha.setText(tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 2).toString());
             txtConfirmaSenha.setText(tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 2).toString());
-            if(tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 3).equals("Sim")){
+            if (tblUsuario.getValueAt(tblUsuario.getSelectedRow(), 3).equals("Sim")) {
                 chkPermissao.setSelected(true);
-            }else{
+            } else {
                 chkPermissao.setSelected(false);
             }
         }
