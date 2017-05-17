@@ -24,8 +24,9 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
     public TelaCadastroCategoria() {
         initComponents();
         DefaultTableModel dtmCategorias = (DefaultTableModel) tblCategoria.getModel();
-        //seta o tamanho das colunas
         tblCategoria.setRowSorter(new TableRowSorter(dtmCategorias));
+        
+        //seta o tamanho das colunas
         tblCategoria.getColumn("ID").setPreferredWidth(35);
         tblCategoria.getColumn("NOME").setPreferredWidth(120);
         tblCategoria.getColumn("DESCRIÇÃO").setPreferredWidth(227);
@@ -61,6 +62,7 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         btnCCadastrar = new javax.swing.JButton();
         btnCAtualizar = new javax.swing.JButton();
         btnCExcluir = new javax.swing.JButton();
+        lblCUsuario = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblCategoria = new javax.swing.JTable();
@@ -101,6 +103,8 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
             }
         });
 
+        lblCUsuario.setText("Usuário: ");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -121,13 +125,18 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
                         .addGap(67, 67, 67)
                         .addComponent(btnCAtualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                        .addComponent(btnCExcluir)))
+                        .addComponent(btnCExcluir))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblCUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
+                .addComponent(lblCUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtCNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -184,10 +193,7 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -361,6 +367,7 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblCUsuario;
     private javax.swing.JTable tblCategoria;
     private javax.swing.JTextArea txtCDescricao;
     private javax.swing.JTextField txtCNome;
