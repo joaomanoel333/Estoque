@@ -5,6 +5,7 @@
  */
 package view;
 
+import connection.Sessao;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Fornecedor;
@@ -23,6 +24,7 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         initComponents();
         DefaultTableModel dtmFornecedor = (DefaultTableModel) tblFornecedor.getModel();
         readJTable();
+        lblFUsuario.setText("Usuário: "+Sessao.getUsuario());
     }
 
     public void readJTable() {
@@ -166,7 +168,7 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
                 .addGap(87, 87, 87))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(

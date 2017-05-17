@@ -5,6 +5,8 @@
  */
 package view;
 
+import connection.Sessao;
+
 /**
  *
  * @author Joao_Manoel
@@ -16,6 +18,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        lblPUsuario.setText("Usuário: " + Sessao.getUsuario());
     }
 
     /**
@@ -91,8 +94,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(827, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblPUsuario)
-                .addGap(104, 104, 104))
+                .addComponent(lblPUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,6 +184,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new TelaCadastroCategoria().setVisible(true);
+        System.out.println(Sessao.getUsuario());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

@@ -1,7 +1,7 @@
 
 package model.dao;
 
-import Singleton.UsuarioSingleton;
+import connection.Sessao;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -65,8 +65,7 @@ public class UsuarioDAO {
                 if(rs.next()){
                     
                     check = true;
-                    UsuarioSingleton.setUsuario(login);
-                    UsuarioSingleton.getPermissao(1);
+                    Sessao.getInstance().setUsuario(login);
                     
                 }
             } catch (SQLException ex) {
@@ -76,6 +75,8 @@ public class UsuarioDAO {
             }
             return check;
         }
+    
+    
     
     
 }
