@@ -1,6 +1,7 @@
 
 package model.dao;
 
+import Singleton.UsuarioSingleton;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,6 +53,7 @@ public class UsuarioDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             boolean check = false;
+            Usuario usuario = new Usuario();
             
             try {
                 
@@ -63,6 +65,8 @@ public class UsuarioDAO {
                 if(rs.next()){
                     
                     check = true;
+                    UsuarioSingleton.setUsuario(login);
+                    UsuarioSingleton.getPermissao(1);
                     
                 }
             } catch (SQLException ex) {

@@ -5,6 +5,7 @@
  */
 package view;
 
+import Singleton.UsuarioSingleton;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import model.dao.UsuarioDAO;
@@ -102,6 +103,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnLEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLEntrarActionPerformed
         
         UsuarioDAO dao = new UsuarioDAO();
+        System.out.println(UsuarioSingleton.getUsuario());
         
         if(dao.checkLogin(txtLNome.getText(),new String(jpwLSenha.getPassword())) || txtLNome.getText().equals("root") && new String(jpwLSenha.getPassword()).equals("root")){
             new TelaPrincipal().setVisible(true);
