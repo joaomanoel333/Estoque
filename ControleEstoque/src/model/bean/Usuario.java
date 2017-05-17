@@ -7,8 +7,8 @@ public class Usuario {
     private String nome;
     private String senha;
     private Date dataCadastro;
-    private boolean administrador;
-    private boolean edicao;
+    private int administrador;
+    private int edicao;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -42,19 +42,19 @@ public class Usuario {
         this.dataCadastro = dataCadastro;
     }
 
-    public boolean isAdministrador() {
+    public int getAdministrador() {
         return administrador;
     }
 
-    public void setAdministrador(boolean administrador) {
+    public void setAdministrador(int administrador) {
         this.administrador = administrador;
     }
 
-    public boolean isEdicao() {
+    public int getEdicao() {
         return edicao;
     }
 
-    public void setEdicao(boolean edicao) {
+    public void setEdicao(int edicao) {
         this.edicao = edicao;
     }
     

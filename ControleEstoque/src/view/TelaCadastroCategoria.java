@@ -33,6 +33,8 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         tblCategoria.getColumn("DESCRIÇÃO").setPreferredWidth(227);
         readJTable();
         lblCUsuario.setText("Usuário: "+ Sessao.getUsuario());
+        
+        
     }
 
     public void readJTable() {
@@ -244,10 +246,11 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
                 unico = false;
             }
         }
+        
         System.out.println(unico + " " + tblCategoria.getModel().getRowCount());
 
         if (unico == true) {
-            JOptionPane.showMessageDialog(null, "Produto já cadastrado!");
+            JOptionPane.showMessageDialog(null, "Categoria já cadastrada!");
         } else {
 
             c.setNome(txtCNome.getText());
