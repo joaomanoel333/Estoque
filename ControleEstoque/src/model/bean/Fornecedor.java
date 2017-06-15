@@ -77,6 +77,9 @@ public class Fornecedor {
         this.dataCadastro = dataCadastro;
     }
     
-    
+    @Override
+    public String toString(){
+        return getNome();
+    }
     
 }

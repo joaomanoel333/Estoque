@@ -48,5 +48,9 @@ public class Categoria {
         this.dataCadastro = dataCadastro;
     }
     
+    @Override
+    public String toString(){
+        return getNome();
+    }
     
 }

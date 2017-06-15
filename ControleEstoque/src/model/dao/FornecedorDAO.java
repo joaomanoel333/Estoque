@@ -33,7 +33,7 @@ public class FornecedorDAO {
             JOptionPane.showMessageDialog(null, "Erro ao Salvar " + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
-        }
+        } 
     }
 
     public List<Fornecedor> read() {
