@@ -261,7 +261,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                 txtUsuario.setText("");
                 txtSenha.setText("");
                 txtConfirmaSenha.setText("");
-                chkPermissao.setSelected(unico);
+                chkPermissao.setSelected(false);
                 readJTable();
             }
         } else {

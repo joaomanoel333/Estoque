@@ -10,6 +10,7 @@ import model.bean.Fornecedor;
 import model.bean.Produto;
 import model.dao.CategoriaDAO;
 import model.dao.FornecedorDAO;
+import model.dao.ProdutoDAO;
 
 /**
  *
@@ -66,12 +67,12 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         btnPCadastrar = new javax.swing.JButton();
         btnPAtualizar = new javax.swing.JButton();
         btnPExcluir = new javax.swing.JButton();
-        txtPValor = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         cbFornecedor = new javax.swing.JComboBox<>();
         cbCategoria = new javax.swing.JComboBox<>();
         chkPadaria = new javax.swing.JCheckBox();
+        txtPValor = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -107,8 +108,6 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
 
         btnPExcluir.setText("Excluir");
 
-        txtPValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-
         jLabel6.setText("Fornecedor");
 
         jLabel7.setText("Categoria");
@@ -133,9 +132,9 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtPQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(69, 69, 69)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtPValor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(txtPValor, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -259,10 +258,42 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
 
     private void btnPCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPCadastrarActionPerformed
         
+        //carrega combobox do fornecedor e categoria
+        Fornecedor fornecedorcb = (Fornecedor) cbFornecedor.getSelectedItem();
+        Categoria categoriacb = (Categoria) cbCategoria.getSelectedItem();
+        
         Produto p = new Produto();
         ProdutoDAO dao = new ProdutoDAO();
         
+        //op para calcular valor de venda com porcentagem do lucro
+        double valorVenda,lucro;
+        lucro = Double.parseDouble(txtPLucro.getSelectedText()) / 100;
+        valorVenda = (Double.parseDouble(txtPValor.getSelectedText()) * lucro) + Double.parseDouble(txtPValor.getSelectedText());
         
+            p.setNome(txtPNome.getText());
+            p.setDescricao(txtPDescricao.getText());
+            p.setValorCompra(Double.parseDouble(txtPValor.getText()));
+            p.setValorVenda(valorVenda);
+            p.setQuantidade(Integer.parseInt(txtPQuantidade.getText()));
+            p.setFornecedor(fornecedorcb.getIdFornecedor());
+            p.setCategoria(categoriacb.getIdCategoria());
+            if (chkPadaria.isSelected()) {
+                    p.setPadaria(1);
+                } else {
+                    p.setPadaria(0);
+                }
+            
+            dao.create(p);
+
+            txtPNome.setText("");
+            txtPDescricao.setText("");
+            txtPValor.setText("");
+            txtPLucro.setText("");
+            txtPQuantidade.setText("");
+            txtPNome.setText("");
+            chkPadaria.setSelected(false);
+
+            //readJTable();
         
         
         
@@ -326,6 +357,6 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     private javax.swing.JTextField txtPLucro;
     private javax.swing.JTextField txtPNome;
     private javax.swing.JTextField txtPQuantidade;
-    private javax.swing.JFormattedTextField txtPValor;
+    private javax.swing.JTextField txtPValor;
     // End of variables declaration//GEN-END:variables
 }

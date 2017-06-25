@@ -24,7 +24,7 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         initComponents();
         DefaultTableModel dtmFornecedor = (DefaultTableModel) tblFornecedor.getModel();
         readJTable();
-        lblFUsuario.setText("Usuário: "+Sessao.getUsuario());
+        lblFUsuario.setText("Usuário: " + Sessao.getUsuario());
     }
 
     public void readJTable() {
@@ -36,9 +36,9 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
             dtmFornecedor.addRow(new Object[]{
                 f.getIdFornecedor(),
                 f.getNome(),
-                f.getResponsavel(),
                 f.getCNPJ(),
                 f.getTelefone(),
+                f.getResponsavel(),
                 f.getTelefoneResponsavel(),});
         }
     }
@@ -341,6 +341,12 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
 
                 dao.delete(f);
                 readJTable();
+
+                txtFNome.setText("");
+                txtFCNPJ.setText("");
+                txtFTelefone.setText("");
+                txtFResponsavel.setText("");
+                txtFTelResponsavel.setText("");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um fornecedor para excluir!");
