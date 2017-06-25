@@ -11,7 +11,7 @@ public class Produto {
     private int categoria;
     private int usuarioCadastro;
     private Date dataCadastro;
-    private boolean padaria;
+    private int padaria;
 
     public int getIdProduto() {
         return idProduto;
@@ -93,11 +93,11 @@ public class Produto {
         this.dataCadastro = dataCadastro;
     }
 
-    public boolean isPadaria() {
+    public int getPadaria() {
         return padaria;
     }
 
-    public void setPadaria(boolean padaria) {
+    public void setPadaria(int padaria) {
         this.padaria = padaria;
     }
     
