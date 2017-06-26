@@ -22,7 +22,7 @@ import model.bean.Produto;
  * @author João
  */
 public class ProdutoDAO {
-    
+
     public List<Produto> read() {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -35,7 +35,7 @@ public class ProdutoDAO {
             while (rs.next()) {
                 Produto produto = new Produto();
 
-                produto.setIdProduto(rs.getInt("idFornecedor"));
+                produto.setIdProduto(rs.getInt("idProduto"));
                 produto.setNome(rs.getString("Nome"));
                 produto.setDescricao(rs.getString("Descricao"));
                 produto.setValorCompra(rs.getDouble("ValorCompra"));
@@ -45,17 +45,28 @@ public class ProdutoDAO {
                 produto.setCategoria(rs.getInt("Categoria"));
                 produto.setPadaria(rs.getInt("Padaria"));
                 produtos.add(produto);
+                
+                
+                /*insert into produto(Nome,Descricao,ValorCompra,ValorVenda,Quantidade,Categoria,Padaria) VALUES("teste","testeee",'4.50','5.00','50','1','0');
+select * from produto;
+
+select produto.idProduto,produto.Nome,produto.Descricao,produto.Quantidade,categoria.Nome from produto,categoria where produto.idProduto = 1;
+
+SELECT idProduto,Nome,Descricao,Quantidade
+FROM produto 
+INNER JOIN categoria ON idCategoria = produto.Categoria;*/
+                
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-        
         return produtos;
     }
-    
-     public void create(Produto p) {
+
+    public void create(Produto p) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
@@ -76,10 +87,10 @@ public class ProdutoDAO {
             JOptionPane.showMessageDialog(null, "Erro ao Salvar " + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
-        } 
+        }
     }
-     
-     public void update(Produto p) {
+
+    public void update(Produto p) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
@@ -104,8 +115,8 @@ public class ProdutoDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-     
-         public void delete(Produto p) {
+
+    public void delete(Produto p) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
@@ -122,5 +133,5 @@ public class ProdutoDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    
+
 }

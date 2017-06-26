@@ -19,31 +19,28 @@ public class UsuarioDAO {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        System.out.println("Erro no list 1");
         List<Usuario> usuarios = new ArrayList<>();
 
         try {
 
-            System.out.println("Erro no list 1");
             stmt = con.prepareStatement("SELECT * FROM usuario");
             rs = stmt.executeQuery();
-            System.out.println("Erro no list 1.5");
+
             while (rs.next()) {
                 Usuario usuario = new Usuario();
-                System.out.println("Erro no list 2");
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setNome(rs.getString("Nome"));
                 usuario.setSenha(rs.getString("Senha"));
                 usuario.setEdicao(rs.getInt("Edicao"));
                 usuarios.add(usuario);
-                System.out.println("Erro no list 2.5");
+
             }
-            System.out.println("Erro no list 3");
+
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
-            System.out.println("Erro no list 4");
+
         }
         return usuarios;
     }

@@ -5,6 +5,7 @@
  */
 package view;
 
+import connection.Sessao;
 import model.bean.Categoria;
 import model.bean.Fornecedor;
 import model.bean.Produto;
@@ -23,6 +24,8 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
      */
     public TelaCadastroProduto() {
         initComponents();
+        
+        lblPUsuario.setText("Usuário: " + Sessao.getUsuario());
         
         //popula o combobox categoria
         CategoriaDAO cdao = new CategoriaDAO();
@@ -73,6 +76,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         cbCategoria = new javax.swing.JComboBox<>();
         chkPadaria = new javax.swing.JCheckBox();
         txtPValor = new javax.swing.JTextField();
+        lblPUsuario = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -112,7 +116,13 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
 
         jLabel7.setText("Categoria");
 
+        cbFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar" }));
+
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar" }));
+
         chkPadaria.setText("Padaria");
+
+        lblPUsuario.setText("Usuário: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,11 +183,16 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
                                         .addGap(236, 236, 236)))
                                 .addComponent(btnPExcluir)
                                 .addGap(42, 42, 42))))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblPUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(0, 0, 0)
+                .addComponent(lblPUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -233,7 +248,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -353,6 +368,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblPUsuario;
     private javax.swing.JTextArea txtPDescricao;
     private javax.swing.JTextField txtPLucro;
     private javax.swing.JTextField txtPNome;
