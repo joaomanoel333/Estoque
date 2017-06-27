@@ -18,7 +18,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-        lblPUsuario.setText("Usuário: " + Sessao.getUsuario());
+        lblPUsuario.setText("Usuário: " + Sessao.getInstance().getNomeUser());
     }
 
     /**
@@ -185,7 +185,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new TelaCadastroCategoria().setVisible(true);
-        System.out.println(Sessao.getUsuario());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed

@@ -4,47 +4,27 @@ package connection;
 import model.bean.Usuario;
 
 public class Sessao {
-    
-//        private static Sessao instance = null;
-//    private Usuario usuario;
-//    
-//    private Sessao(){
-//    }
-//    
-//    public void setUsuario(Usuario usuario) {
-//        this.usuario = usuario;
-//    }
-//    
-//    public Usuario getUsuario(){
-//        return usuario;
-//    }
-//    
-//    public static Sessao getInstance(){
-//        if(instance == null){
-//            instance = new Sessao();
-//        }
-//        return instance;
-//    }
-//}
-    
-    
-
     private static Sessao instance = null;
-    private static String nomeUsuario;
-    
+    private Usuario usuario;
     
     private Sessao(){
     }
     
-    public static void setUsuario(String usuario) {
-        Sessao.nomeUsuario = usuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     
-    public static String getUsuario(){
-        return nomeUsuario;
+    public Usuario getUsuario(){
+        return usuario;
     }
     
+    public String getNomeUser(){
+        return usuario.getNome();
+    }
     
+    public int getEdicaoUser(){
+        return usuario.getEdicao();
+    }
     
     public static Sessao getInstance(){
         if(instance == null){

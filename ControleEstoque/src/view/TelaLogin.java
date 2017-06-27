@@ -108,10 +108,6 @@ public class TelaLogin extends javax.swing.JFrame {
         
         if(dao.checkLogin(txtLNome.getText(),new String(jpwLSenha.getPassword())) || txtLNome.getText().equals("root") && new String(jpwLSenha.getPassword()).equals("root")){
             new TelaPrincipal().setVisible(true);
-            //Sessao.setUsuario(txtLNome.getText());
-//            Usuario user = new Usuario();
-//            user = Sessao.getInstance().getUsuario();
-            System.out.println(Sessao.getUsuario());
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Login ou Senha inválidos!");

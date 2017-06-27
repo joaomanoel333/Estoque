@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.bean.Categoria;
+import model.bean.Usuario;
 import model.dao.CategoriaDAO;
 
 /**
@@ -32,7 +33,8 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         tblCategoria.getColumn("NOME").setPreferredWidth(120);
         tblCategoria.getColumn("DESCRIÇÃO").setPreferredWidth(227);
         readJTable();
-        lblCUsuario.setText("Usuário: " + Sessao.getUsuario());
+        
+        lblCUsuario.setText("Usuário: " + Sessao.getInstance().getNomeUser());
 
     }
 

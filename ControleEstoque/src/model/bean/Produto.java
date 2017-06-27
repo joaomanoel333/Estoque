@@ -12,6 +12,24 @@ public class Produto {
     private int usuarioCadastro;
     private Date dataCadastro;
     private int padaria;
+    private String nomeFornecedor;
+    private String nomeCategoria;
+
+    public String getNomeFornecedor() {
+        return nomeFornecedor;
+    }
+
+    public void setNomeFornecedor(String nomeFornecedor) {
+        this.nomeFornecedor = nomeFornecedor;
+    }
+
+    public String getNomeCategoria() {
+        return nomeCategoria;
+    }
+
+    public void setNomeCategoria(String nomeCategoria) {
+        this.nomeCategoria = nomeCategoria;
+    }
 
     public int getIdProduto() {
         return idProduto;

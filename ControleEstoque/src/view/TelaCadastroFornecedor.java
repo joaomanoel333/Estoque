@@ -24,7 +24,7 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         initComponents();
         DefaultTableModel dtmFornecedor = (DefaultTableModel) tblFornecedor.getModel();
         readJTable();
-        lblFUsuario.setText("Usuário: " + Sessao.getUsuario());
+        lblFUsuario.setText("Usuário: " + Sessao.getInstance().getNomeUser());
     }
 
     public void readJTable() {

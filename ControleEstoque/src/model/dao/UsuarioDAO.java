@@ -62,7 +62,11 @@ public class UsuarioDAO {
             if (rs.next()) {
 
                 check = true;
-                Sessao.getInstance().setUsuario(login);
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
+                usuario.setNome(rs.getString("Nome"));
+                usuario.setSenha(rs.getString("Senha"));
+                usuario.setEdicao(rs.getInt("Edicao"));
+                Sessao.getInstance().setUsuario(usuario);
 
             }
         } catch (SQLException ex) {

@@ -26,7 +26,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         DefaultTableModel dtmUsuario = (DefaultTableModel) tblUsuario.getModel();
         tblUsuario.setRowSorter(new TableRowSorter(dtmUsuario));
         readJTable();
-        lblUUsuario.setText("Usuário: " + Sessao.getUsuario());
+        lblUUsuario.setText("Usuário: " + Sessao.getInstance().getNomeUser());
     }
 
     public void readJTable() {

@@ -29,21 +29,26 @@ public class ProdutoDAO {
         ResultSet rs = null;
         List<Produto> produtos = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM produto");
+            stmt = con.prepareStatement("SELECT produto.idProduto,produto.Nome,produto.Descricao,produto.Quantidade,produto.ValorCompra,produto.ValorVenda,fornecedor.Nome,categoria.Nome,produto.Padaria\n" +
+                                        "FROM produto \n" +
+                                        "INNER JOIN fornecedor \n" +
+                                        "	ON Fornecedor = fornecedor.idFornecedor\n" +
+                                        "INNER JOIN categoria\n" +
+                                        "    ON Categoria = categoria.idCategoria;");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Produto produto = new Produto();
 
-                produto.setIdProduto(rs.getInt("idProduto"));
-                produto.setNome(rs.getString("Nome"));
-                produto.setDescricao(rs.getString("Descricao"));
-                produto.setValorCompra(rs.getDouble("ValorCompra"));
-                produto.setValorVenda(rs.getDouble("ValorVenda"));
-                produto.setQuantidade(rs.getInt("Quantidade"));
-                produto.setFornecedor(rs.getInt("Fornecedor"));
-                produto.setCategoria(rs.getInt("Categoria"));
-                produto.setPadaria(rs.getInt("Padaria"));
+                produto.setIdProduto(rs.getInt("produto.idProduto"));
+                produto.setNome(rs.getString("produto.Nome"));
+                produto.setDescricao(rs.getString("produto.Descricao"));
+                produto.setQuantidade(rs.getInt("produto.Quantidade"));
+                produto.setValorCompra(rs.getDouble("produto.ValorCompra"));
+                produto.setValorVenda(rs.getDouble("produto.ValorVenda"));
+                produto.setNomeFornecedor(rs.getString("fornecedor.Nome"));
+                produto.setNomeCategoria(rs.getString("categoria.Nome"));
+                produto.setPadaria(rs.getInt("produto.Padaria"));
                 produtos.add(produto);
                 
                 
