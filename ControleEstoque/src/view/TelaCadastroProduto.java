@@ -6,6 +6,8 @@
 package view;
 
 import connection.Sessao;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.bean.Categoria;
 import model.bean.Fornecedor;
 import model.bean.Produto;
@@ -32,21 +34,47 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         for (Categoria c : cdao.read()) {
             cbCategoria.addItem(c);
         }
-
+        readJTable();
         //popula combobox fornecedor
         FornecedorDAO ddao = new FornecedorDAO();
         for (Fornecedor f : ddao.read()) {
             cbFornecedor.addItem(f);
         }
-
+        
         //codigo para colocar no botao
         /*
         Categoria categoria = (Categoria) cbCategoria.getSelectedItem();
         //pegar o id fica - categoria.getICategoria
          */
     }
-    
-    public void limpaProduto(){
+
+    public void readJTable() {
+        DefaultTableModel dtmProduto = (DefaultTableModel) tblProduto.getModel();
+        dtmProduto.setNumRows(0);
+        ProdutoDAO pdao = new ProdutoDAO();
+        String padaria = null;
+        for (Produto p : pdao.read()) {
+
+            if (p.getPadaria() == 1) {
+                padaria = "Sim";
+            } else {
+                padaria = "Não";
+            }
+
+            dtmProduto.addRow(new Object[]{
+                p.getIdProduto(),
+                p.getNome(),
+                p.getDescricao(),
+                p.getQuantidade(),
+                p.getValorCompra(),
+                p.getValorVenda(),
+                p.getNomeFornecedor(),
+                p.getNomeCategoria(),
+                padaria,});
+        }
+    }
+
+    public void limpaProduto() {
         txtPNome.setText("");
         txtPDescricao.setText("");
         txtPValor.setText("");
@@ -90,7 +118,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         lblPUsuario = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProduto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produtos");
@@ -120,8 +148,18 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         });
 
         btnPAtualizar.setText("Atualizar");
+        btnPAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPAtualizarActionPerformed(evt);
+            }
+        });
 
         btnPExcluir.setText("Excluir");
+        btnPExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPExcluirActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Fornecedor");
 
@@ -234,7 +272,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos Cadastrados"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -250,7 +288,17 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        tblProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProdutoMouseClicked(evt);
+            }
+        });
+        tblProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblProdutoKeyReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblProduto);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -316,12 +364,114 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         }
 
         dao.create(p);
-
+        readJTable();
         limpaProduto();
 
-        //readJTable();
-
     }//GEN-LAST:event_btnPCadastrarActionPerformed
+
+    private void btnPAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPAtualizarActionPerformed
+
+        if (tblProduto.getSelectedRow() != -1) {
+
+        //carrega combobox do fornecedor e categoria
+        Fornecedor fornecedorcb = (Fornecedor) cbFornecedor.getSelectedItem();
+        Categoria categoriacb = (Categoria) cbCategoria.getSelectedItem();
+
+        Produto p = new Produto();
+        ProdutoDAO dao = new ProdutoDAO();
+
+        //op para converter valor de compra para double
+        String valorCompra = txtPValor.getText();
+        Double valorCompraDouble = new Double(valorCompra.replace(",", "."));
+
+        //op para calcular valor de venda com porcentagem do lucro
+        String lucro = txtPLucro.getText();
+        Double lucrod = new Double(lucro.replace(",", "."));
+        Double lucrodouble = lucrod / 100;
+        Double valorVenda = (valorCompraDouble * lucrodouble) + valorCompraDouble;
+
+        p.setNome(txtPNome.getText());
+        p.setDescricao(txtPDescricao.getText());
+        p.setValorCompra(valorCompraDouble);
+        p.setValorVenda(valorVenda);
+        p.setQuantidade(Integer.parseInt(txtPQuantidade.getText()));
+        p.setFornecedor(fornecedorcb.getIdFornecedor());
+        p.setCategoria(categoriacb.getIdCategoria());
+        if (chkPadaria.isSelected()) {
+            p.setPadaria(1);
+        } else {
+            p.setPadaria(0);
+        }
+            p.setIdProduto((int) tblProduto.getValueAt(tblProduto.getSelectedRow(), 0));
+
+            dao.update(p);
+            readJTable();
+            limpaProduto();
+        }
+    }//GEN-LAST:event_btnPAtualizarActionPerformed
+
+    private void tblProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutoMouseClicked
+        
+         ProdutoDAO dao = new ProdutoDAO();
+         
+         
+        
+        if (tblProduto.getSelectedRow() != -1) {
+            
+            String nomezinho = tblProduto.getValueAt(tblProduto.getSelectedRow(), 6).toString();
+            txtPNome.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 1).toString());
+            txtPDescricao.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 2).toString());
+            txtPQuantidade.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 3).toString());
+            txtPValor.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 4).toString());
+            cbCategoria.setSelectedItem(dao.buscaFornecedor(nomezinho));
+            
+            if (tblProduto.getValueAt(tblProduto.getSelectedRow(), 8).equals("Sim")) {
+                chkPadaria.setSelected(true);
+            } else {
+                chkPadaria.setSelected(false);
+            }
+
+        }
+    }//GEN-LAST:event_tblProdutoMouseClicked
+
+    private void tblProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblProdutoKeyReleased
+
+            if (tblProduto.getSelectedRow() != -1) {
+            
+            txtPNome.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 1).toString());
+            txtPDescricao.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 2).toString());
+            txtPQuantidade.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 3).toString());
+            txtPValor.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 4).toString());
+            
+            if (tblProduto.getValueAt(tblProduto.getSelectedRow(), 8).equals("Sim")) {
+                chkPadaria.setSelected(true);
+            } else {
+                chkPadaria.setSelected(false);
+            }
+
+        }
+    }//GEN-LAST:event_tblProdutoKeyReleased
+
+    private void btnPExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPExcluirActionPerformed
+        if (tblProduto.getSelectedRow() != -1) {
+            if (JOptionPane.showConfirmDialog(null, "Deseja excluir o produto selecionado?") == 0) {
+
+                Produto p = new Produto();
+                ProdutoDAO dao = new ProdutoDAO();
+                p.setIdProduto((int) tblProduto.getValueAt(tblProduto.getSelectedRow(), 0));
+
+                dao.delete(p);
+                readJTable();
+                limpaProduto();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um produto para excluir!");
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_btnPExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -376,8 +526,8 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblPUsuario;
+    private javax.swing.JTable tblProduto;
     private javax.swing.JTextArea txtPDescricao;
     private javax.swing.JTextField txtPLucro;
     private javax.swing.JTextField txtPNome;

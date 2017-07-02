@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.bean.Fornecedor;
 import model.bean.Produto;
 
 /**
@@ -29,12 +30,12 @@ public class ProdutoDAO {
         ResultSet rs = null;
         List<Produto> produtos = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT produto.idProduto,produto.Nome,produto.Descricao,produto.Quantidade,produto.ValorCompra,produto.ValorVenda,fornecedor.Nome,categoria.Nome,produto.Padaria\n" +
-                                        "FROM produto \n" +
-                                        "INNER JOIN fornecedor \n" +
-                                        "	ON Fornecedor = fornecedor.idFornecedor\n" +
-                                        "INNER JOIN categoria\n" +
-                                        "    ON Categoria = categoria.idCategoria;");
+            stmt = con.prepareStatement("SELECT produto.idProduto,produto.Nome,produto.Descricao,produto.Quantidade,produto.ValorCompra,produto.ValorVenda,fornecedor.Nome,categoria.Nome,produto.Padaria\n"
+                    + "FROM produto \n"
+                    + "INNER JOIN fornecedor \n"
+                    + "	ON Fornecedor = fornecedor.idFornecedor\n"
+                    + "INNER JOIN categoria\n"
+                    + "    ON Categoria = categoria.idCategoria;");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -50,18 +51,6 @@ public class ProdutoDAO {
                 produto.setNomeCategoria(rs.getString("categoria.Nome"));
                 produto.setPadaria(rs.getInt("produto.Padaria"));
                 produtos.add(produto);
-                
-                
-                /*insert into produto(Nome,Descricao,ValorCompra,ValorVenda,Quantidade,Categoria,Padaria) VALUES("teste","testeee",'4.50','5.00','50','1','0');
-select * from produto;
-
-select produto.idProduto,produto.Nome,produto.Descricao,produto.Quantidade,categoria.Nome from produto,categoria where produto.idProduto = 1;
-
-SELECT idProduto,Nome,Descricao,Quantidade
-FROM produto 
-INNER JOIN categoria ON idCategoria = produto.Categoria;*/
-                
-                
             }
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,6 +59,35 @@ INNER JOIN categoria ON idCategoria = produto.Categoria;*/
         }
         return produtos;
     }
+
+    
+    public List<Fornecedor> buscaFornecedor(String nome) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Fornecedor> fornecedores = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("Select idFornecedor from fornecedor where Nome like ?");
+            stmt.setString(1, nome);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Fornecedor fornecedor = new Fornecedor();
+                fornecedor.setIdFornecedor(rs.getInt("idFornecedor"));
+                fornecedores.add(fornecedor);
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Buscar o Fornecedor  " + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return fornecedores;
+    }
+    
+    
+    
 
     public void create(Produto p) {
         Connection con = ConnectionFactory.getConnection();
