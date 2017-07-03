@@ -50,6 +50,12 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         }
     }
 
+    public void limpaUsuario() {
+        txtUsuario.setText("");
+        txtSenha.setText("");
+        txtConfirmaSenha.setText("");
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,6 +73,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         btnUAtualizar = new javax.swing.JButton();
         btnUExcluir = new javax.swing.JButton();
         lblUUsuario = new javax.swing.JLabel();
+        btnULimpar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuario = new javax.swing.JTable();
@@ -110,6 +117,13 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
 
         lblUUsuario.setText("Usuário: ");
 
+        btnULimpar.setText("Limpar");
+        btnULimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnULimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -122,8 +136,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                         .addGap(64, 64, 64)
                         .addComponent(btnUAtualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                        .addComponent(btnUExcluir)
-                        .addGap(28, 28, 28))
+                        .addComponent(btnUExcluir))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(chkPermissao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -134,8 +147,10 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                             .addComponent(txtSenha)
                             .addComponent(txtConfirmaSenha))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblUUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnULimpar, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +171,9 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(chkPermissao)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chkPermissao)
+                    .addComponent(btnULimpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUCadastrar)
@@ -346,6 +363,10 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblUsuarioKeyReleased
 
+    private void btnULimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnULimparActionPerformed
+        limpaUsuario();
+    }//GEN-LAST:event_btnULimparActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -386,6 +407,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnUAtualizar;
     private javax.swing.JButton btnUCadastrar;
     private javax.swing.JButton btnUExcluir;
+    private javax.swing.JButton btnULimpar;
     private javax.swing.JCheckBox chkPermissao;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

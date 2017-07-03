@@ -8,6 +8,7 @@ package view;
 import connection.Sessao;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.bean.Fornecedor;
 import model.dao.FornecedorDAO;
 
@@ -23,6 +24,8 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
     public TelaCadastroFornecedor() {
         initComponents();
         DefaultTableModel dtmFornecedor = (DefaultTableModel) tblFornecedor.getModel();
+        tblFornecedor.setRowSorter(new TableRowSorter(dtmFornecedor));
+        tblFornecedor.getColumn("ID").setPreferredWidth(30);
         readJTable();
         lblFUsuario.setText("Usuário: " + Sessao.getInstance().getNomeUser());
     }
@@ -41,6 +44,14 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
                 f.getResponsavel(),
                 f.getTelefoneResponsavel(),});
         }
+    }
+
+    public void limpaFornecedor() {
+        txtFNome.setText("");
+        txtFCNPJ.setText("");
+        txtFTelefone.setText("");
+        txtFResponsavel.setText("");
+        txtFTelResponsavel.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -63,6 +74,7 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         btnFAtualizar = new javax.swing.JButton();
         btnFExcluir = new javax.swing.JButton();
         lblFUsuario = new javax.swing.JLabel();
+        btnFLimpar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFornecedor = new javax.swing.JTable();
@@ -124,6 +136,13 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
 
         lblFUsuario.setText("Usuário: ");
 
+        btnFLimpar.setText("Limpar");
+        btnFLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -158,18 +177,20 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(btnFCadastrar)
                 .addGap(219, 219, 219)
                 .addComponent(btnFAtualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFExcluir)
-                .addGap(87, 87, 87))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFLimpar)
+                    .addComponent(btnFExcluir))
+                .addGap(77, 77, 77))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,13 +206,15 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtFTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(txtFResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFTelResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFLimpar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFCadastrar)
                     .addComponent(btnFAtualizar)
@@ -274,82 +297,96 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         Fornecedor f = new Fornecedor();
         FornecedorDAO dao = new FornecedorDAO();
 
-        for (int i = 0; i < tblFornecedor.getModel().getRowCount(); i++) {
-            if (txtFNome.getText().equals(tblFornecedor.getValueAt(i, 1))) {
-                unico = true;
-            } else {
-                unico = false;
+        if (Sessao.getInstance().getEdicaoUser() == 0) {
+            JOptionPane.showMessageDialog(null, "Usuário sem permissão de edição!");
+        } else {
+            for (int i = 0; i < tblFornecedor.getModel().getRowCount(); i++) {
+                if (txtFNome.getText().toLowerCase().equals(tblFornecedor.getValueAt(i, 1).toString().toLowerCase())) {
+                    unico = true;
+                } else {
+                    unico = false;
+                }
             }
-        }
-        System.out.println(unico + " " + tblFornecedor.getModel().getRowCount());
+            System.out.println(unico + " " + tblFornecedor.getModel().getRowCount());
 
-        if (unico == true) {
-            JOptionPane.showMessageDialog(null, "Fornecedor já cadastrado!");
-        } else {
+            if (unico == true) {
+                JOptionPane.showMessageDialog(null, "Fornecedor já cadastrado!");
+            } else {
 
-            f.setNome(txtFNome.getText());
-            f.setResponsavel(txtFResponsavel.getText());
-            f.setCNPJ(txtFCNPJ.getText());
-            f.setTelefone(txtFTelefone.getText());
-            f.setTelefoneResponsavel(txtFTelResponsavel.getText());
+                f.setNome(txtFNome.getText());
+                f.setResponsavel(txtFResponsavel.getText());
+                f.setCNPJ(txtFCNPJ.getText());
+                f.setTelefone(txtFTelefone.getText());
+                f.setTelefoneResponsavel(txtFTelResponsavel.getText());
 
-            dao.create(f);
-
-            txtFNome.setText("");
-            txtFCNPJ.setText("");
-            txtFTelefone.setText("");
-            txtFResponsavel.setText("");
-            txtFTelResponsavel.setText("");
-
-            readJTable();
-        }
-    }//GEN-LAST:event_btnFCadastrarActionPerformed
-
-    private void btnFAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFAtualizarActionPerformed
-        if (tblFornecedor.getSelectedRow() != -1) {
-
-            Fornecedor f = new Fornecedor();
-            FornecedorDAO dao = new FornecedorDAO();
-            f.setNome(txtFNome.getText());
-            f.setCNPJ(txtFCNPJ.getText());
-            f.setTelefone(txtFTelefone.getText());
-            f.setResponsavel(txtFResponsavel.getText());
-            f.setTelefoneResponsavel(txtFTelResponsavel.getText());
-            f.setIdFornecedor((int) tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 0));
-
-            dao.update(f);
-
-            txtFNome.setText("");
-            txtFCNPJ.setText("");
-            txtFTelefone.setText("");
-            txtFResponsavel.setText("");
-            txtFTelResponsavel.setText("");
-
-            readJTable();
-        } else {
-            JOptionPane.showMessageDialog(null, "Nenhum fornecedor selecionado!");
-        }
-    }//GEN-LAST:event_btnFAtualizarActionPerformed
-
-    private void btnFExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFExcluirActionPerformed
-        if (tblFornecedor.getSelectedRow() != -1) {
-            if (JOptionPane.showConfirmDialog(null, "Deseja excluir o fornecedor selecionada?") == 0) {
-
-                Fornecedor f = new Fornecedor();
-                FornecedorDAO dao = new FornecedorDAO();
-                f.setIdFornecedor((int) tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 0));
-
-                dao.delete(f);
-                readJTable();
+                dao.create(f);
 
                 txtFNome.setText("");
                 txtFCNPJ.setText("");
                 txtFTelefone.setText("");
                 txtFResponsavel.setText("");
                 txtFTelResponsavel.setText("");
+
+                readJTable();
             }
+        }
+    }//GEN-LAST:event_btnFCadastrarActionPerformed
+
+    private void btnFAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFAtualizarActionPerformed
+
+        if (Sessao.getInstance().getEdicaoUser() == 0) {
+            JOptionPane.showMessageDialog(null, "Usuário sem permissão de edição!");
         } else {
-            JOptionPane.showMessageDialog(null, "Selecione um fornecedor para excluir!");
+            if (tblFornecedor.getSelectedRow() != -1) {
+
+                Fornecedor f = new Fornecedor();
+                FornecedorDAO dao = new FornecedorDAO();
+                f.setNome(txtFNome.getText());
+                f.setCNPJ(txtFCNPJ.getText());
+                f.setTelefone(txtFTelefone.getText());
+                f.setResponsavel(txtFResponsavel.getText());
+                f.setTelefoneResponsavel(txtFTelResponsavel.getText());
+                f.setIdFornecedor((int) tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 0));
+
+                dao.update(f);
+
+                txtFNome.setText("");
+                txtFCNPJ.setText("");
+                txtFTelefone.setText("");
+                txtFResponsavel.setText("");
+                txtFTelResponsavel.setText("");
+
+                readJTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum fornecedor selecionado!");
+            }
+        }
+    }//GEN-LAST:event_btnFAtualizarActionPerformed
+
+    private void btnFExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFExcluirActionPerformed
+
+        if (Sessao.getInstance().getEdicaoUser() == 0) {
+            JOptionPane.showMessageDialog(null, "Usuário sem permissão de edição!");
+        } else {
+            if (tblFornecedor.getSelectedRow() != -1) {
+                if (JOptionPane.showConfirmDialog(null, "Deseja excluir o fornecedor selecionada?") == 0) {
+
+                    Fornecedor f = new Fornecedor();
+                    FornecedorDAO dao = new FornecedorDAO();
+                    f.setIdFornecedor((int) tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 0));
+
+                    dao.delete(f);
+                    readJTable();
+
+                    txtFNome.setText("");
+                    txtFCNPJ.setText("");
+                    txtFTelefone.setText("");
+                    txtFResponsavel.setText("");
+                    txtFTelResponsavel.setText("");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um fornecedor para excluir!");
+            }
         }
     }//GEN-LAST:event_btnFExcluirActionPerformed
 
@@ -378,6 +415,10 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_tblFornecedorKeyReleased
+
+    private void btnFLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFLimparActionPerformed
+        limpaFornecedor();
+    }//GEN-LAST:event_btnFLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -426,6 +467,7 @@ public class TelaCadastroFornecedor extends javax.swing.JFrame {
     private javax.swing.JButton btnFAtualizar;
     private javax.swing.JButton btnFCadastrar;
     private javax.swing.JButton btnFExcluir;
+    private javax.swing.JButton btnFLimpar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

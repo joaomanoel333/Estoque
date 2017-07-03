@@ -82,10 +82,11 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("insert into usuario(Nome,Senha,Edicao) VALUES(?,?,?)");
+            stmt = con.prepareStatement("insert into usuario(Nome,Senha,Edicao) VALUES(?,?,?,?)");
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getSenha());
             stmt.setInt(3, u.getEdicao());
+            stmt.setInt(4, Sessao.getInstance().getIdUsuario());
 
             stmt.executeUpdate();
 

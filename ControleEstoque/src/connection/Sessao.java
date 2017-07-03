@@ -26,6 +26,10 @@ public class Sessao {
         return usuario.getEdicao();
     }
     
+    public int getIdUsuario(){
+        return usuario.getIdUsuario();
+    }
+    
     public static Sessao getInstance(){
         if(instance == null){
             instance = new Sessao();

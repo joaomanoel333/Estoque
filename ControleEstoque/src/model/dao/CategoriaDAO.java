@@ -1,6 +1,7 @@
 package model.dao;
 
 import connection.ConnectionFactory;
+import connection.Sessao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,9 +20,10 @@ public class CategoriaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("insert into categoria(Nome,Descricao) VALUES(?,?)");
+            stmt = con.prepareStatement("insert into categoria(Nome,Descricao,UsuarioCadastro) VALUES(?,?,?)");
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getDescricao());
+            stmt.setInt(3, Sessao.getInstance().getIdUsuario());
 
             stmt.executeUpdate();
 

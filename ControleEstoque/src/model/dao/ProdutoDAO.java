@@ -6,6 +6,7 @@
 package model.dao;
 
 import connection.ConnectionFactory;
+import connection.Sessao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,6 +62,33 @@ public class ProdutoDAO {
     }
 
     
+    
+        public List<Produto> readBaixoEstoque() {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Produto> produtos = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("select idProduto, Nome, Descricao, Quantidade from produto where Quantidade <= 10 and Padaria = 0;");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produto produto = new Produto();
+
+                produto.setIdProduto(rs.getInt("produto.idProduto"));
+                produto.setNome(rs.getString("produto.Nome"));
+                produto.setDescricao(rs.getString("produto.Descricao"));
+                produto.setQuantidade(rs.getInt("produto.Quantidade"));
+                produtos.add(produto);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar produtos com estoque baixo - Erro:  " + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return produtos;
+    }
+    
     public List<Fornecedor> buscaFornecedor(String nome) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -94,7 +122,7 @@ public class ProdutoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("insert into produto(Nome,Descricao,ValorCompra,ValorVenda,Quantidade,Fornecedor,Categoria,Padaria) VALUES(?,?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("insert into produto(Nome,Descricao,ValorCompra,ValorVenda,Quantidade,Fornecedor,Categoria,Padaria) VALUES(?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, p.getNome());
             stmt.setString(2, p.getDescricao());
             stmt.setDouble(3, p.getValorCompra());
@@ -103,6 +131,7 @@ public class ProdutoDAO {
             stmt.setInt(6, p.getFornecedor());
             stmt.setInt(7, p.getCategoria());
             stmt.setInt(8, p.getPadaria());
+            stmt.setInt(9, Sessao.getInstance().getIdUsuario());
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Salvo com sucesso");

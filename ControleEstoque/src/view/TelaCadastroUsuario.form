@@ -63,15 +63,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="btnUCadastrar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                           <Component id="btnUAtualizar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="57" max="32767" attributes="0"/>
                           <Component id="btnUExcluir" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="chkPermissao" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -82,10 +81,13 @@
                               <Component id="txtConfirmaSenha" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="lblUUsuario" min="-2" pref="90" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblUUsuario" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="btnULimpar" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -110,7 +112,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtConfirmaSenha" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="chkPermissao" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="chkPermissao" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnULimpar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnUCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -177,6 +182,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Usu&#xe1;rio: "/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnULimpar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Limpar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnULimparActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
