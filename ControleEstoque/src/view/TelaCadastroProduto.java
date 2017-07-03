@@ -467,7 +467,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
             txtPDescricao.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 2).toString());
             txtPQuantidade.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 3).toString());
             txtPValor.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 4).toString());
-            cbCategoria.setSelectedItem(dao.buscaFornecedor(nomezinho));
+            cbCategoria.getModel().setSelectedItem(dao.buscaFornecedor(nomezinho));
             
             if (tblProduto.getValueAt(tblProduto.getSelectedRow(), 8).equals("Sim")) {
                 chkPadaria.setSelected(true);
