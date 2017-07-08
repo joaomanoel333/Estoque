@@ -31,7 +31,7 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         //seta o tamanho das colunas
         tblCategoria.getColumn("ID").setPreferredWidth(35);
         tblCategoria.getColumn("NOME").setPreferredWidth(120);
-        tblCategoria.getColumn("DESCRIÇÃO").setPreferredWidth(227);
+        tblCategoria.getColumn("DESCRIÇÃO").setPreferredWidth(300);
         readJTable();
 
         lblCUsuario.setText("Usuário: " + Sessao.getInstance().getNomeUser());
@@ -93,6 +93,8 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtCDescricao);
 
         btnCCadastrar.setText("Cadastrar");
+        btnCCadastrar.setMaximumSize(new java.awt.Dimension(80, 20));
+        btnCCadastrar.setMinimumSize(new java.awt.Dimension(80, 20));
         btnCCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCCadastrarActionPerformed(evt);
@@ -100,6 +102,8 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         });
 
         btnCAtualizar.setText("Atualizar");
+        btnCAtualizar.setMaximumSize(new java.awt.Dimension(80, 20));
+        btnCAtualizar.setMinimumSize(new java.awt.Dimension(80, 20));
         btnCAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCAtualizarActionPerformed(evt);
@@ -127,33 +131,34 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCNome))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnCCadastrar)
-                        .addGap(67, 67, 67)
-                        .addComponent(btnCAtualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                        .addComponent(btnCExcluir))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCLimpar, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCNome))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnCCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnCAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnCExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnCLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblCUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addComponent(lblCUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -163,14 +168,13 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCCadastrar)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnCAtualizar)
-                        .addComponent(btnCExcluir))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Categorias Cadastradas"));
@@ -213,7 +217,7 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -226,6 +230,7 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,13 +246,84 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCategoriaKeyReleased
+
+        if (tblCategoria.getSelectedRow() != -1) {
+
+            txtCNome.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 1).toString());
+            txtCDescricao.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 2).toString());
+
+        }
+    }//GEN-LAST:event_tblCategoriaKeyReleased
+
+    private void tblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoriaMouseClicked
+
+        if (tblCategoria.getSelectedRow() != -1) {
+
+            txtCNome.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 1).toString());
+            txtCDescricao.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 2).toString());
+        }
+    }//GEN-LAST:event_tblCategoriaMouseClicked
+
+    private void btnCLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCLimparActionPerformed
+        limpaCategoria();
+    }//GEN-LAST:event_btnCLimparActionPerformed
+
+    private void btnCExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCExcluirActionPerformed
+
+        if (Sessao.getInstance().getEdicaoUser() == 0) {
+            JOptionPane.showMessageDialog(null, "Usuário sem permissão de edição!");
+        } else {
+            if (tblCategoria.getSelectedRow() != -1) {
+                if (JOptionPane.showConfirmDialog(null, "Deseja excluir a categoria selecionada?") == 0) {
+                    Categoria c = new Categoria();
+                    CategoriaDAO dao = new CategoriaDAO();
+                    c.setIdCategoria((int) tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 0));
+
+                    dao.delete(c);
+
+                    txtCNome.setText("");
+                    txtCDescricao.setText("");
+                    readJTable();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione uma categoria para excluir");
+            }
+        }
+    }//GEN-LAST:event_btnCExcluirActionPerformed
+
+    private void btnCAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCAtualizarActionPerformed
+
+        if (Sessao.getInstance().getEdicaoUser() == 0) {
+            JOptionPane.showMessageDialog(null, "Usuário sem permissão de edição!");
+        } else {
+            if (tblCategoria.getSelectedRow() != -1) {
+
+                Categoria c = new Categoria();
+                CategoriaDAO dao = new CategoriaDAO();
+                c.setNome(txtCNome.getText());
+                c.setDescricao(txtCDescricao.getText());
+                c.setIdCategoria((int) tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 0));
+
+                dao.update(c);
+
+                txtCNome.setText("");
+                txtCDescricao.setText("");
+                readJTable();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhuma categoria selecionada!");
+            }
+        }
+    }//GEN-LAST:event_btnCAtualizarActionPerformed
 
     private void btnCCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCCadastrarActionPerformed
 
@@ -284,79 +360,6 @@ public class TelaCadastroCategoria extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnCCadastrarActionPerformed
-
-    private void tblCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCategoriaKeyReleased
-
-        if (tblCategoria.getSelectedRow() != -1) {
-
-            txtCNome.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 1).toString());
-            txtCDescricao.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 2).toString());
-
-        }
-
-    }//GEN-LAST:event_tblCategoriaKeyReleased
-
-    private void btnCExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCExcluirActionPerformed
-
-        if (Sessao.getInstance().getEdicaoUser() == 0) {
-            JOptionPane.showMessageDialog(null, "Usuário sem permissão de edição!");
-        } else {
-            if (tblCategoria.getSelectedRow() != -1) {
-                if (JOptionPane.showConfirmDialog(null, "Deseja excluir a categoria selecionada?") == 0) {
-                    Categoria c = new Categoria();
-                    CategoriaDAO dao = new CategoriaDAO();
-                    c.setIdCategoria((int) tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 0));
-
-                    dao.delete(c);
-
-                    txtCNome.setText("");
-                    txtCDescricao.setText("");
-                    readJTable();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Selecione uma categoria para excluir");
-            }
-        }
-    }//GEN-LAST:event_btnCExcluirActionPerformed
-
-    private void tblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoriaMouseClicked
-
-        if (tblCategoria.getSelectedRow() != -1) {
-
-            txtCNome.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 1).toString());
-            txtCDescricao.setText(tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 2).toString());
-        }
-    }//GEN-LAST:event_tblCategoriaMouseClicked
-
-    private void btnCAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCAtualizarActionPerformed
-
-        if (Sessao.getInstance().getEdicaoUser() == 0) {
-            JOptionPane.showMessageDialog(null, "Usuário sem permissão de edição!");
-        } else {
-            if (tblCategoria.getSelectedRow() != -1) {
-
-                Categoria c = new Categoria();
-                CategoriaDAO dao = new CategoriaDAO();
-                c.setNome(txtCNome.getText());
-                c.setDescricao(txtCDescricao.getText());
-                c.setIdCategoria((int) tblCategoria.getValueAt(tblCategoria.getSelectedRow(), 0));
-
-                dao.update(c);
-
-                txtCNome.setText("");
-                txtCDescricao.setText("");
-                readJTable();
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Nenhuma categoria selecionada!");
-            }
-        }
-
-    }//GEN-LAST:event_btnCAtualizarActionPerformed
-
-    private void btnCLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCLimparActionPerformed
-        limpaCategoria();
-    }//GEN-LAST:event_btnCLimparActionPerformed
 
     /**
      * @param args the command line arguments

@@ -122,7 +122,7 @@ public class ProdutoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("insert into produto(Nome,Descricao,ValorCompra,ValorVenda,Quantidade,Fornecedor,Categoria,Padaria) VALUES(?,?,?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("insert into produto(Nome,Descricao,ValorCompra,ValorVenda,Quantidade,Fornecedor,Categoria,Padaria) VALUES(?,?,?,?,?,?,?,?)");
             stmt.setString(1, p.getNome());
             stmt.setString(2, p.getDescricao());
             stmt.setDouble(3, p.getValorCompra());
@@ -131,7 +131,7 @@ public class ProdutoDAO {
             stmt.setInt(6, p.getFornecedor());
             stmt.setInt(7, p.getCategoria());
             stmt.setInt(8, p.getPadaria());
-            stmt.setInt(9, Sessao.getInstance().getIdUsuario());
+//            stmt.setInt(9, Sessao.getInstance().getIdUsuario());
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Salvo com sucesso");
